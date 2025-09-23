@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EduConnect Rural - Role Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-200 to-purple-200 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl p-6 sm:p-8 flex flex-col lg:flex-row gap-6">
+        <!-- Left Panel: Header + Login -->
+        <div class="flex-1 flex flex-col gap-6">
+            <!-- Header -->
+            <div class="flex flex-col items-center mb-6 text-center lg:items-start lg:text-left">
+                <div class="bg-teal-400 rounded-full w-16 h-16 flex items-center justify-center mb-2">
+                    <svg fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24" class="w-9 h-9">
+                        <path d="M12 2l7 4v6c0 5.25-3.5 9.74-7 10-3.5-.26-7-4.75-7-10V6l7-4z"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800">EduConnect</h1>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">
+                    Offline-first educational platform for rural schools.<br>
+                    Access lessons, manage attendance with QR+GPS, and stay connected even without internet.
+                </p>
+            </div>
+
+            <!-- Login Form -->
+            <div class="bg-gray-50 rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Login / Enter Details</h2>
+                <form id="loginForm" class="flex flex-col gap-4">
+                    <input type="text" id="userName" placeholder="Your Name" class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400">
+                    <input type="email" id="userEmail" placeholder="Email" class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400">
+                    <input type="password" id="userPassword" placeholder="Password" class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400">
+                    <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition">Continue</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Panel: Role Selection -->
+        <div class="flex-1 bg-gray-50 rounded-xl shadow p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-1">Welcome! Choose your role to continue</h2>
+            <p class="text-gray-500 mb-6 text-sm sm:text-base">Select how you'll be using the platform today</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- Teacher -->
+                <div class="flex items-center gap-3 p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-teal-400 shadow transition cursor-pointer"
+                     onclick="redirectToRole('teacher.html')">
+                    <span class="text-2xl bg-teal-100 text-teal-500 rounded-lg p-2">🎓</span>
+                    <div>
+                        <div class="font-semibold text-gray-800">Teacher</div>
+                        <div class="text-gray-500 text-sm">Upload lessons, create quizzes, manage attendance</div>
+                    </div>
+                </div>
+                <!-- Student -->
+                <div class="flex items-center gap-3 p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-teal-400 shadow transition cursor-pointer"
+                     onclick="redirectToRole('student.html')">
+                    <span class="text-2xl bg-green-100 text-green-500 rounded-lg p-2">📗</span>
+                    <div>
+                        <div class="font-semibold text-gray-800">Student</div>
+                        <div class="text-gray-500 text-sm">Access lessons, take quizzes, check attendance</div>
+                    </div>
+                </div>
+                <!-- Parent -->
+                <div class="flex items-center gap-3 p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-teal-400 shadow transition cursor-pointer"
+                     onclick="redirectToRole('parent.html')">
+                    <span class="text-2xl bg-purple-100 text-purple-500 rounded-lg p-2">👨‍👩‍👧</span>
+                    <div>
+                        <div class="font-semibold text-gray-800">Parent</div>
+                        <div class="text-gray-500 text-sm">Track child progress and attendance</div>
+                    </div>
+                </div>
+                <!-- Administrator -->
+                <div class="flex items-center gap-3 p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-teal-400 shadow transition cursor-pointer"
+                     onclick="redirectToRole('admin.html')">
+                    <span class="text-2xl bg-orange-100 text-orange-500 rounded-lg p-2">⚙️</span>
+                    <div>
+                        <div class="font-semibold text-gray-800">Administrator</div>
+                        <div class="text-gray-500 text-sm">Manage platform, view reports, analytics</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle login form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const password = document.getElementById('userPassword').value.trim();
+            if (name && email && password) {
+                localStorage.setItem('userName', name);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password); // Optional: encrypt for production
+                alert('Details saved! Please select your role.');
+            } else {
+                alert('Please enter name, email, and password.');
+            }
+        });
+
+        function redirectToRole(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
